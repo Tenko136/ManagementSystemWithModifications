@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="insert-initial-data" author="T">
+        <insert tableName="user">
+            <column name="name" value="admintest"/>
+            <column name="email" value="admintest"/>
+            <column name="password" value="$2a$10$38F.CHGJhlIpipw.kIBlauqvwMOjOZOwFu1qPHZnYwgnJCjbrZcJK"/>
+            <column name="role" value="ADMIN"/>
+        </insert>
+        <insert tableName="user">
+            <column name="name" value="usertest"/>
+            <column name="email" value="usertest"/>
+            <column name="password" value="$2a$10$xiyQb0RU3dTcK2b9pcPDOe4joWvnEhn1NU5YsQhDNsB5z3mkAdmu6"/>
+            <column name="role" value="USER"/>
+        </insert>
+        <insert tableName="user">
+            <column name="name" value="usertest2"/>
+            <column name="email" value="usertest2"/>
+            <column name="password" value="$2a$10$S3ticPZoGIiKg5j4d5s3ROJdcgbLANXmQUywQ/DuUVFpfrSDv2oHu"/>
+            <column name="role" value="USER"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

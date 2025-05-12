@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="insert-card-data" author="T">
+        <insert tableName="card">
+            <column name="user_id" value="2"/>
+            <column name="number" value="0000000000000001"/>
+            <column name="expiration_date" value="2025-05-30"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="balance" value="100"/>
+            <column name="card_blocking_request" value="0"/>
+        </insert>
+        <insert tableName="card">
+            <column name="user_id" value="3"/>
+            <column name="number" value="0000000000000002"/>
+            <column name="expiration_date" value="2025-05-30"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="balance" value="200"/>
+            <column name="card_blocking_request" value="0"/>
+        </insert>
+        <insert tableName="card">
+            <column name="user_id" value="3"/>
+            <column name="number" value="0000000000000003"/>
+            <column name="expiration_date" value="2025-05-30"/>
+            <column name="status" value="ACTIVE"/>
+            <column name="balance" value="300"/>
+            <column name="card_blocking_request" value="0"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
