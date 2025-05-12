@@ -4,30 +4,24 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-    <changeSet id="create_table_user" author="T">
-        <createTable tableName="users">
+    <changeSet id="create-currency-rate" author="T">
+        <createTable tableName="currency_rate">
             <column autoIncrement="true" name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="full_name" type="varchar(50)">
-                <constraints nullable="true"/>
-            </column>
-            <column name="last_name" type="varchar(50)">
+            <column name="USD" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="first_name" type="varchar(50)">
+            <column name="EUR" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="middle_name" type="varchar(50)">
+            <column name="RUB" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="email" type="varchar(30)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="password" type="varchar(255)">
+            <column name="KZT" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="role" type="varchar(30)">
+            <column name="currency_date" type="date">
                 <constraints nullable="false"/>
             </column>
         </createTable>

@@ -1,4 +1,4 @@
-package kz.tenko.BankCard.ManagementSystem.entity;
+package kz.tenko.BankCard.ManagementSystem.enums;
 
 public enum CardStatus {
 

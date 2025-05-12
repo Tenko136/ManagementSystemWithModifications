@@ -2,6 +2,7 @@ package kz.tenko.BankCard.ManagementSystem.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import kz.tenko.BankCard.ManagementSystem.enums.CardStatus;
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.type.descriptor.jdbc.LongVarcharJdbcType;
 

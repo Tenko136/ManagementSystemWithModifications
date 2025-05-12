@@ -37,15 +37,15 @@ public class CardServiceImpl implements CardService {
     @Override
     public List<Card> findCards(FindCardsRequestDTO findCardsRequestDTO) {
 //        boolean isAdmin = false;
-////        for (GrantedAuthority ga : SecurityContextHolder.getContext().getAuthentication().getAuthorities()) {
-////            if (ga.getAuthority().endsWith("ADMIN")) {
-////                isAdmin = true;
-////            }
-////        }
-////        if (isAdmin) {
-////            return cardDAO.findCards(findCardsRequestDTO);
-////        }
-////        var user = userDAO.findUserByEmail(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
+//        for (GrantedAuthority ga : SecurityContextHolder.getContext().getAuthentication().getAuthorities()) {
+//            if (ga.getAuthority().endsWith("ADMIN")) {
+//                isAdmin = true;
+//            }
+//        }
+//        if (isAdmin) {
+//            return cardDAO.findCards(findCardsRequestDTO);
+//        }
+//        var user = userDAO.findUserByEmail(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
 //        return cardDAO.findCards(user.getId());
     return null;
     }

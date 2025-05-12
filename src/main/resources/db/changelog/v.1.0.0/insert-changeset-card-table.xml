@@ -6,28 +6,34 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <changeSet id="insert-card-data" author="T">
         <insert tableName="card">
-            <column name="user_id" value="2"/>
+            <column name="user_id" value="1"/>
             <column name="number" value="0000000000000001"/>
-            <column name="expiration_date" value="2025-05-30"/>
+            <column name="expiration_date" value="2026-05-30"/>
             <column name="status" value="ACTIVE"/>
-            <column name="balance" value="100"/>
+            <column name="balance" value="1000"/>
+            <column name="currency_rate" value="KZT"/>
             <column name="card_blocking_request" value="0"/>
+            <column name="secret_num" value="123"/>
         </insert>
         <insert tableName="card">
-            <column name="user_id" value="3"/>
+            <column name="user_id" value="2"/>
             <column name="number" value="0000000000000002"/>
-            <column name="expiration_date" value="2025-05-30"/>
+            <column name="expiration_date" value="2026-05-30"/>
             <column name="status" value="ACTIVE"/>
-            <column name="balance" value="200"/>
+            <column name="balance" value="2000"/>
+            <column name="currency_rate" value="USD"/>
             <column name="card_blocking_request" value="0"/>
+            <column name="secret_num" value="456"/>
         </insert>
         <insert tableName="card">
-            <column name="user_id" value="3"/>
+            <column name="user_id" value="2"/>
             <column name="number" value="0000000000000003"/>
-            <column name="expiration_date" value="2025-05-30"/>
+            <column name="expiration_date" value="2026-05-30"/>
             <column name="status" value="ACTIVE"/>
-            <column name="balance" value="300"/>
+            <column name="balance" value="3000"/>
+            <column name="currency_rate" value="EUR"/>
             <column name="card_blocking_request" value="0"/>
+            <column name="secret_num" value="789"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

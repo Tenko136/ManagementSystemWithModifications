@@ -5,7 +5,8 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
     <include file="create-changeset-user-table.xml" relativeToChangelogFile="true"/>
     <include file="create-changeset-card-table.xml" relativeToChangelogFile="true"/>
+    <include file="create-changeset-rates-table.xml" relativeToChangelogFile="true"/>
     <include file="changeset-relation-table.xml" relativeToChangelogFile="true"/>
-    <include file="insert-changeset-auth-table.xml" relativeToChangelogFile="true"/>
     <include file="insert-changeset-card-table.xml" relativeToChangelogFile="true"/>
+    <include file="insert-changeset-user-table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
