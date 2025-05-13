@@ -39,20 +39,18 @@ public class Card {
     public Card() {
     }
 
-    public Card(Long userId, String number, LocalDate expirationDate, CardStatus status, Long balance) {
+    public Card(Long id, Long userId, String number, LocalDate expirationDate, CardStatus status, Long balance, boolean cardBlockingRequest) {
+        this.id = id;
         this.userId = userId;
         this.number = number;
         this.expirationDate = expirationDate;
         this.status = status;
         this.balance = balance;
+        this.cardBlockingRequest = cardBlockingRequest;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Long getUserId() {
@@ -74,7 +72,7 @@ public class Card {
     @Transient
     @JsonProperty("number")
     public String getMaskedNumber() {
-        return "**** **** **** " + getNumber().substring(number.length() -4);
+        return "**** **** **** " + getNumber().substring(number.length() - 4);
     }
 
     public LocalDate getExpirationDate() {

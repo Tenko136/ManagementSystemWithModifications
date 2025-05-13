@@ -14,8 +14,17 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "full_name")
+    private String fullName;
+
+    @Column(name = "last_nam")
+    private String lastName;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "middle_name")
+    private String middleName;
 
     @Column(name = "email")
     private String email;
@@ -30,9 +39,12 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String email, String password, Role role) {
+    public User(Long id, String fullName, String lastName, String firstName, String middleName, String email, String password, Role role) {
         this.id = id;
-        this.name = name;
+        this.fullName = fullName;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.middleName = middleName;
         this.email = email;
         this.password = password;
         this.role = role;
@@ -42,16 +54,36 @@ public class User {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getFullName() {
+        return fullName;
     }
 
-    public String getName() {
-        return name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     public String getEmail() {

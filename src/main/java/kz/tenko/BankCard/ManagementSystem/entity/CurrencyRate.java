@@ -31,12 +31,17 @@ public class CurrencyRate {
     public CurrencyRate() {
     }
 
-    public CurrencyRate(CurrencyRate USD, CurrencyRate EUR, CurrencyRate RUB, CurrencyRate KZT, LocalDateTime currencyDate) {
+    public CurrencyRate(Long id, CurrencyRate USD, CurrencyRate EUR, CurrencyRate RUB, CurrencyRate KZT, LocalDateTime currencyDate) {
+        this.id = id;
         this.USD = USD;
         this.EUR = EUR;
         this.RUB = RUB;
         this.KZT = KZT;
         this.currencyDate = currencyDate;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public CurrencyRate getUSD() {
