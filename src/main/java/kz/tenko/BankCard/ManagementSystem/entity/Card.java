@@ -53,6 +53,10 @@ public class Card {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getUserId() {
         return userId;
     }
@@ -97,5 +101,13 @@ public class Card {
 
     public void setBalance(Long balance) {
         this.balance = balance;
+    }
+
+    public boolean isCardBlockingRequest() {
+        return cardBlockingRequest;
+    }
+
+    public void setCardBlockingRequest(boolean cardBlockingRequest) {
+        this.cardBlockingRequest = cardBlockingRequest;
     }
 }

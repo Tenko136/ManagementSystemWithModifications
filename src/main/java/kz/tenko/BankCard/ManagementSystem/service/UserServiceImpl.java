@@ -1,45 +1,57 @@
 package kz.tenko.BankCard.ManagementSystem.service;
 
-import kz.tenko.BankCard.ManagementSystem.DAO.UserDAO;
-import kz.tenko.BankCard.ManagementSystem.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import kz.tenko.BankCard.ManagementSystem.DAO.AdminDAOImpl;
+import kz.tenko.BankCard.ManagementSystem.DAO.UserDAOImpl;
+import kz.tenko.BankCard.ManagementSystem.DTO.FindCardsRequestDTO;
+import kz.tenko.BankCard.ManagementSystem.entity.Card;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl  {
 
-    @Autowired
-    private final UserDAO userDAO;
+   private final UserDAOImpl userDAO;
+   private final AdminDAOImpl adminDAO;
 
-    public UserServiceImpl(UserDAO userDAO) {
+    public UserServiceImpl(UserDAOImpl userDAO, AdminDAOImpl adminDAO) {
         this.userDAO = userDAO;
+        this.adminDAO = adminDAO;
     }
 
-    @Override
     @Transactional
-    public List<User> findUsers() {
-        return userDAO.findUsers();
-    }
-
-    @Override
-    @Transactional
-    public void saveUser(User user) {
-        if (user.getEmail() == null || user.getRole() == null || user.getName() == null || user.getPassword() == null) {
-            throw new RuntimeException("Заполните обязательные поля");
+    public void cardBlockingRequest(String cardNumber) {
+        if (!cardFilter(cardNumber)) {
+            throw new RuntimeException(String.format("Не найдена карта с номером %s у данного пользователя ", cardNumber));
         }
+        userDAO.blockingCard(cardNumber);
+    }
+    @Transactional
+    public void transferAmount(String cardFrom, String cardTo, long transferAmount) {
 
-        if (userDAO.findUserByEmail(user.getEmail()) != null) {
-            throw new RuntimeException("Пользователь с таким email уже существует");
+        if (cardFilter(cardFrom) && cardFilter(cardTo)) {
+            long from =userDAO.findBalance(cardFrom);
+            if ((from - transferAmount) < 0) {
+                throw new RuntimeException("Недостаточно средств");
+            }
+            userDAO.changeBalance(cardFrom, -transferAmount);
+            userDAO.changeBalance(cardTo, transferAmount);
+            return;
         }
-        userDAO.saveUser(user);
+        throw new RuntimeException("Попытка перевода на стороннюю карту");
     }
 
-    @Override
-    @Transactional
-    public void deleteUser(long id) {
-        userDAO.deleteUser(id);
+    public boolean cardFilter(String cardNumber) {
+        boolean isFound = false;
+        FindCardsRequestDTO findCardsRequestDTO = new FindCardsRequestDTO();
+        findCardsRequestDTO.setCardNumber(cardNumber);
+        for (Card card : adminDAO.findCards(findCardsRequestDTO)) {
+            if (card.getNumber().equals(cardNumber)) {
+                isFound = true;
+                break;
+            }
+        }
+        return isFound;
     }
 }

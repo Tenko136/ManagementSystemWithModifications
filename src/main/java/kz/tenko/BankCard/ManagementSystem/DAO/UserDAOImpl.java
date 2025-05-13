@@ -2,6 +2,7 @@ package kz.tenko.BankCard.ManagementSystem.DAO;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import kz.tenko.BankCard.ManagementSystem.entity.Card;
 import kz.tenko.BankCard.ManagementSystem.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class UserDAOImpl implements UserDAO {
+public class UserDAOImpl {
 
     @Autowired
     private final EntityManager entityManager;
@@ -18,29 +19,21 @@ public class UserDAOImpl implements UserDAO {
         this.entityManager = entityManager;
     }
 
-    @Override
-    public User findUserByEmail(String email) {
-        Query query = entityManager.createQuery("from User where email = :email");
-        query.setParameter("email", email);
-        return (User) query.getSingleResult();
+    public void blockingCard(String cardNumber) {
+        Query query = entityManager.createQuery("update Card set cardBlockingRequest = true where number =:cardNumber");
+        query.setParameter("cardNumber", cardNumber);
+        query.executeUpdate();
     }
 
-    @Override
-    public List<User> findUsers() {
-        Query query = entityManager.createQuery("from User");
-        return query.getResultList();
+    public Long findBalance(String number) {
+        Card card = entityManager.find(Card.class, number);
+        return card.getBalance();
     }
 
-    @Override
-    public void saveUser(User user) {
-        User u = entityManager.merge(user);
-        user.setId(u.getId());
-    }
-
-    @Override
-    public void deleteUser(long id) {
-        Query query = entityManager.createQuery("delete from User where id =:userId");
-        query.setParameter("userId", id);
+    public void changeBalance(String number, Long amount) {
+        Query query = entityManager.createQuery("update Card set balance = balance + :amount where number = :number");
+        query.setParameter("amount", amount);
+        query.setParameter("number", number);
         query.executeUpdate();
     }
 }
