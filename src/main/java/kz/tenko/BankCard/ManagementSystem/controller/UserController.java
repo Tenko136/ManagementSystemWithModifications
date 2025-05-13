@@ -1,13 +1,15 @@
 package kz.tenko.BankCard.ManagementSystem.controller;
 
+import kz.tenko.BankCard.ManagementSystem.entity.Card;
 import kz.tenko.BankCard.ManagementSystem.service.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -35,9 +37,17 @@ public class UserController {
     }
 
     @GetMapping("/balance")
-    public void balance() {
-
+    public void findBalance(String cardNum) {
+        userService.findBalance(cardNum);
     }
 
+    @GetMapping("/all-transfer")
+    public void findAllTransfer() {
+        userService.findAllTransfers();
+    }
 
+    @GetMapping("/my-card")
+    public List<Card> findCards(Long userId) {
+        return userService.findCards(userId);
+    }
 }

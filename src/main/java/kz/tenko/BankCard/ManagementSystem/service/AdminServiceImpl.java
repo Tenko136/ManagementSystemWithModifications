@@ -73,4 +73,8 @@ public class AdminServiceImpl {
     public void deleteUser(long id) {
         adminDAO.deleteUser(id);
     }
+
+    public void blockingCard() {
+        adminDAO.blockingCard();
+    }
 }

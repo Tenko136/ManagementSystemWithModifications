@@ -7,7 +7,6 @@ import kz.tenko.BankCard.ManagementSystem.entity.Card;
 import kz.tenko.BankCard.ManagementSystem.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -26,22 +25,21 @@ public class AdminDAOImpl {
         card.setId(c.getId());
     }
 
-    public List<Card> findCards(FindCardsRequestDTO findCardsRequestDTO) {
-        Query query = null;
-        if (!StringUtils.hasText(findCardsRequestDTO.getCardNumber())) {
-            query = entityManager.createQuery("from Card");
-        } else {
-         query = entityManager.createQuery("from Card where number = :cardNumber");
-         query.setParameter("cardNumber", findCardsRequestDTO.getCardNumber());
-        }
-        query.setFirstResult((findCardsRequestDTO.getPageNumber() - 1) * findCardsRequestDTO.getPageSize());
-        query.setMaxResults(findCardsRequestDTO.getPageSize());
-        return query.getResultList();
-    }
+//    public List<Card> findCards(FindCardsRequestDTO findCardsRequestDTO) {
+//        Query query = null;
+//        if (!StringUtils.hasText(findCardsRequestDTO.getCardNumber())) {
+//            query = entityManager.createQuery("from Card");
+//        } else {
+//         query = entityManager.createQuery("from Card where number = :cardNumber");
+//         query.setParameter("cardNumber", findCardsRequestDTO.getCardNumber());
+//        }
+//        query.setFirstResult((findCardsRequestDTO.getPageNumber() - 1) * findCardsRequestDTO.getPageSize());
+//        query.setMaxResults(findCardsRequestDTO.getPageSize());
+//        return query.getResultList();
+//    }
 
-    public List<Card> findCards(Long userId) {
-        Query query = entityManager.createQuery("from Card where userId = :userId");
-        query.setParameter("userId", userId);
+    public List<Card> findCards(FindCardsRequestDTO findCardsRequestDTO) {
+        Query query = entityManager.createQuery("from Card");
         return query.getResultList();
     }
 
@@ -72,5 +70,9 @@ public class AdminDAOImpl {
         Query query = entityManager.createQuery("delete from User where id =:userId");
         query.setParameter("userId", id);
         query.executeUpdate();
+    }
+
+    public void blockingCard() {
+
     }
 }
