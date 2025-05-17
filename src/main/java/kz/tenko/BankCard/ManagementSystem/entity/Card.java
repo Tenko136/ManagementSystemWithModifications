@@ -36,10 +36,13 @@ public class Card {
     @Column(name = "card_blocking_request")
     boolean cardBlockingRequest;
 
+    @Column(name = "secret_num")
+    int secretNum;
+
     public Card() {
     }
 
-    public Card(Long id, Long userId, String number, LocalDate expirationDate, CardStatus status, Long balance, boolean cardBlockingRequest) {
+    public Card(Long id, Long userId, String number, LocalDate expirationDate, CardStatus status, Long balance, boolean cardBlockingRequest, int secretNum) {
         this.id = id;
         this.userId = userId;
         this.number = number;
@@ -47,6 +50,7 @@ public class Card {
         this.status = status;
         this.balance = balance;
         this.cardBlockingRequest = cardBlockingRequest;
+        this.secretNum = secretNum;
     }
 
     public Long getId() {
@@ -109,5 +113,13 @@ public class Card {
 
     public void setCardBlockingRequest(boolean cardBlockingRequest) {
         this.cardBlockingRequest = cardBlockingRequest;
+    }
+
+    public int getSecretNum() {
+        return secretNum;
+    }
+
+    public void setSecretNum(int secretNum) {
+        this.secretNum = secretNum;
     }
 }

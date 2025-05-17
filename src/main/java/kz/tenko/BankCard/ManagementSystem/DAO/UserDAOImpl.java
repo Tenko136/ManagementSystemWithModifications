@@ -7,12 +7,16 @@ import kz.tenko.BankCard.ManagementSystem.entity.Card;
 import kz.tenko.BankCard.ManagementSystem.entity.CurrencyRate;
 import org.springframework.stereotype.Repository;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Repository
 public class UserDAOImpl {
 
     private final EntityManager entityManager;
+
+    private final static String currencyURL = "https://openexchangerates.org/api/latest.json?app_id=7e07ce2faba9499991eb01abd0c50e71&symbols=RUB,KZT&date=%s";
+    private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public UserDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;

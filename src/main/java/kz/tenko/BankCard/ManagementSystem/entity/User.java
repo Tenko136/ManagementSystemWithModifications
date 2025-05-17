@@ -17,7 +17,7 @@ public class User {
     @Column(name = "full_name")
     private String fullName;
 
-    @Column(name = "last_nam")
+    @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "first_name")

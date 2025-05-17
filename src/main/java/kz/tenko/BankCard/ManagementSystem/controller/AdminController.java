@@ -1,11 +1,13 @@
 package kz.tenko.BankCard.ManagementSystem.controller;
 
+import kz.tenko.BankCard.ManagementSystem.DTO.CardsForBlocking;
 import kz.tenko.BankCard.ManagementSystem.DTO.FindCardsRequestDTO;
 import kz.tenko.BankCard.ManagementSystem.entity.Card;
 import kz.tenko.BankCard.ManagementSystem.entity.User;
 import kz.tenko.BankCard.ManagementSystem.service.AdminServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -48,8 +50,13 @@ public class AdminController {
         adminService.deleteCard(id);
     }
 
+    @GetMapping("/blocking-card")
+    public List<CardsForBlocking> blockingCardsRequest() {
+       return adminService.blockingCardRequest();
+    }
+
     @PostMapping("/blocking-card")
-    public void blockingCard() {
-        adminService.blockingCard();
+    public void blockingCardResponse(List<CardsForBlocking> cardsForBlocking) {
+        adminService.blockingCardResponse(cardsForBlocking);
     }
 }
