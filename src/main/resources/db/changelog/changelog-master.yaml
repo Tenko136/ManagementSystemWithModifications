@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: '1'
+      author: T
+      changes:
+        - sqlFile:
+            path: v.1.0.0/changelog.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            endDelimiter: ;
