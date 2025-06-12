@@ -27,6 +27,7 @@ public class AdminDAOImpl {
         return query.getResultList();
     }
 
+    //todo проверить корректность
     public void saveUser(User user) {
         User u = entityManager.merge(user);
         user.setId(u.getId());
@@ -43,11 +44,13 @@ public class AdminDAOImpl {
         return query.getResultList();
     }
 
+    //todo проверить корректность
     public void saveCard(Card card) {
         Card c = entityManager.merge(card);
         card.setId(c.getId());
     }
 
+// постраничная выдача:
 //    public List<Card> findCards(FindCardsRequestDTO findCardsRequestDTO) {
 //        Query query = null;
 //        if (!StringUtils.hasText(findCardsRequestDTO.getCardNumber())) {
@@ -67,12 +70,12 @@ public class AdminDAOImpl {
         query.executeUpdate();
     }
 
-
     public User findUserByEmail(String email) {
         Query query = entityManager.createQuery("from User where email = :email");
         query.setParameter("email", email);
         return (User) query.getSingleResult();
     }
+
 
     public List<CardsForBlocking> blockingCardRequest(LocalDate date) {
         Query query = entityManager.createQuery("from Card where date =:date");

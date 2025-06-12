@@ -19,14 +19,15 @@ public class UserServiceImpl {
         this.userDAO = userDAO;
     }
 
-    @Transactional
-    public void cardBlockingRequest(String cardNumber) {
-        if (!cardFilter(cardNumber)) {
-            throw new RuntimeException(String.format("Не найдена карта с номером %s у данного пользователя ", cardNumber));
-        }
-        userDAO.blockingCard(cardNumber);
+    public List<Card> findCards(Long userId) {
+        return userDAO.findCards(userId);
     }
 
+    public Long findBalance(String cardNum) {
+        return userDAO.findBalance(cardNum);
+    }
+
+    //todo возможность перевода на стороннюю карту
     @Transactional
     public void transferAmount(String cardFrom, String cardTo, long transferAmount) {
 
@@ -42,20 +43,14 @@ public class UserServiceImpl {
         throw new RuntimeException("Попытка перевода на стороннюю карту");
     }
 
-    public Long findBalance(String cardNum) {
-        return userDAO.findBalance(cardNum);
-    }
-
-    public void findAllTransfers() {
-        userDAO.findAllTransfers();
-    }
-
+    //todo лишний метод
+    @Transactional
     public boolean cardFilter(String cardNumber) {
         boolean isFound = false;
         FindCardsRequestDTO findCardsRequestDTO = new FindCardsRequestDTO();
         findCardsRequestDTO.setCardNumber(cardNumber);
         for (Card card : userDAO.findCards(userId)) {
-            if (card.getNumber().equals(cardNumber)) {
+            if (card.getCardNumber().equals(cardNumber)) {
                 isFound = true;
                 break;
             }
@@ -63,7 +58,17 @@ public class UserServiceImpl {
         return isFound;
     }
 
-    public List<Card> findCards(Long userId) {
-        return userDAO.findCards(userId);
+    // todo (?)хранить отдельно
+    @Transactional
+    public void findAllTransfers() {
+        userDAO.findAllTransfers();
+    }
+
+    @Transactional
+    public void cardBlockingRequest(String cardNumber) {
+        if (!cardFilter(cardNumber)) {
+            throw new RuntimeException(String.format("Не найдена карта с номером %s у данного пользователя ", cardNumber));
+        }
+        userDAO.blockingCard(cardNumber);
     }
 }

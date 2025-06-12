@@ -6,16 +6,13 @@ import org.hibernate.annotations.JdbcType;
 import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-    @Column(name = "full_name")
-    private String fullName;
 
     @Column(name = "last_name")
     private String lastName;
@@ -26,6 +23,7 @@ public class User {
     @Column(name = "middle_name")
     private String middleName;
 
+    //todo проверка ввода, установить формат "str@str.str"
     @Column(name = "email")
     private String email;
 
@@ -39,9 +37,9 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String fullName, String lastName, String firstName, String middleName, String email, String password, Role role) {
+    public User(Long id, String lastName, String firstName, String middleName, String email, String password, Role role) {
         this.id = id;
-        this.fullName = fullName;
+//        this.fullName = fullName;
         this.lastName = lastName;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -58,13 +56,14 @@ public class User {
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+    // после возвращения добавить в конструктор
+//    public String getFullName() {
+//        return fullName;
+//    }
+//
+//    public void setFullName(String fullName) {
+//        this.fullName = fullName;
+//    }
 
     public String getLastName() {
         return lastName;

@@ -22,11 +22,10 @@ public class UserDAOImpl {
         this.entityManager = entityManager;
     }
 
-    public void blockingCard(String cardNumber) {
-        Query query = entityManager
-                .createQuery("update Card set cardBlockingRequest = true where number =:cardNumber");
-        query.setParameter("cardNumber", cardNumber);
-        query.executeUpdate();
+    public List<Card> findCards(Long userId) {
+        Query query = entityManager.createQuery("from Card where userId = :userId");
+        query.setParameter("userId", userId);
+        return query.getResultList();
     }
 
     public Long findBalance(String number) {
@@ -41,20 +40,22 @@ public class UserDAOImpl {
         query.setParameter("number", number);
         query.executeUpdate();
     }
-    public List<Card> findCards(Long userId) {
-        Query query = entityManager.createQuery("from Card where userId = :userId");
-        query.setParameter("userId", userId);
-        return query.getResultList();
-    }
 
     public void findAllTransfers() {
 
     }
 
+    public void blockingCard(String cardNumber) {
+        Query query = entityManager
+                .createQuery("update Card set cardBlockingRequest = true where number =:cardNumber");
+        query.setParameter("cardNumber", cardNumber);
+        query.executeUpdate();
+    }
+
     @Transactional
     public CurrencyRate getCurrencyRate() {
         return (CurrencyRate) entityManager
-                .createQuery("from CurrencyRate order by dateRate desc limit 1 ")
+                .createQuery("from CurrencyRate order by dateRate desc limit 1")
                 .getSingleResult();
     }
 }

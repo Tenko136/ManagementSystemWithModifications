@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+// todo вынести клиента отдельно, сделать клиентскую часть MVC
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -21,11 +22,19 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/card-blocking-request")
-    public void cardBlockingRequest(String cardNumber) {
-        userService.cardBlockingRequest(cardNumber);
+    //todo извлечение id активного пользователя, ограничение видимости карт в рамках id
+    @GetMapping("/my-card")
+    public List<Card> findCards(Long userId) {
+        return userService.findCards(userId);
     }
 
+    //todo отображение только номера карты и баланса, (?)нужна ДТО
+    @GetMapping("/balance")
+    public void findBalance(String cardNum) {
+        userService.findBalance(cardNum);
+    }
+
+    //todo логика работы с валютами, переводами
     @PostMapping("/transfer")
     public ResponseEntity<?> transferAmount(String cardFrom, String cardTo, long transferAmount) {
         try {
@@ -36,18 +45,15 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @GetMapping("/balance")
-    public void findBalance(String cardNum) {
-        userService.findBalance(cardNum);
-    }
-
+    //todo тоже ограничение показа, стоит вынести в отдельный метод, пока не подключу секьюрити
     @GetMapping("/all-transfer")
     public void findAllTransfer() {
         userService.findAllTransfers();
     }
 
-    @GetMapping("/my-card")
-    public List<Card> findCards(Long userId) {
-        return userService.findCards(userId);
+    //todo проверка
+    @PostMapping("/card-blocking-request")
+    public void cardBlockingRequest(String cardNumber) {
+        userService.cardBlockingRequest(cardNumber);
     }
 }

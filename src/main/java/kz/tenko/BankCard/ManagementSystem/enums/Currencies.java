@@ -1,6 +1,6 @@
 package kz.tenko.BankCard.ManagementSystem.enums;
 
-public enum CurrencyRate {
+public enum Currencies {
 
     USD,
     EUR,

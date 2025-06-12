@@ -7,7 +7,6 @@ import kz.tenko.BankCard.ManagementSystem.entity.User;
 import kz.tenko.BankCard.ManagementSystem.service.AdminServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -19,7 +18,7 @@ public class AdminController {
     public AdminController(AdminServiceImpl adminService) {
         this.adminService = adminService;
     }
-
+// todo постраничный поиск
     @GetMapping("/find-users")
     public List<User> findUsers() {
         return adminService.findUsers();
@@ -50,6 +49,7 @@ public class AdminController {
         adminService.deleteCard(id);
     }
 
+    //todo объединить blockingCardsRequest и blockingCardResponse, убрать из контроллера
     @GetMapping("/blocking-card")
     public List<CardsForBlocking> blockingCardsRequest() {
        return adminService.blockingCardRequest();

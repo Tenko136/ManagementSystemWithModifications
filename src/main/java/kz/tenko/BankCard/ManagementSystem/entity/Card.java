@@ -3,13 +3,14 @@ package kz.tenko.BankCard.ManagementSystem.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import kz.tenko.BankCard.ManagementSystem.enums.CardStatus;
+import kz.tenko.BankCard.ManagementSystem.enums.Currencies;
 import org.hibernate.annotations.JdbcType;
 import org.hibernate.type.descriptor.jdbc.LongVarcharJdbcType;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "card")
+@Table(name = "cards")
 public class Card {
 
     @Id
@@ -20,9 +21,10 @@ public class Card {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "number")
-    private String number;
+    @Column(name = "card_number")
+    private String cardNumber;
 
+    //todo установить отображаемый формат mm/yyyy, автоматический расчет даты срока пользования(прим 3 года)
     @Column(name = "expiration_date")
     private LocalDate expirationDate;
 
@@ -32,6 +34,9 @@ public class Card {
 
     @Column(name = "balance")
     private Long balance;
+
+    @Column(name = "currency")
+    private Currencies currency;
 
     @Column(name = "card_blocking_request")
     boolean cardBlockingRequest;
@@ -45,7 +50,7 @@ public class Card {
     public Card(Long id, Long userId, String number, LocalDate expirationDate, CardStatus status, Long balance, boolean cardBlockingRequest, int secretNum) {
         this.id = id;
         this.userId = userId;
-        this.number = number;
+        this.cardNumber = number;
         this.expirationDate = expirationDate;
         this.status = status;
         this.balance = balance;
@@ -69,18 +74,18 @@ public class Card {
         this.userId = userId;
     }
 
-    public String getNumber() {
-        return number;
+    public String getCardNumber() {
+        return cardNumber;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
     @Transient
     @JsonProperty("number")
     public String getMaskedNumber() {
-        return "**** **** **** " + getNumber().substring(number.length() - 4);
+        return "**** **** **** " + getCardNumber().substring(cardNumber.length() - 4);
     }
 
     public LocalDate getExpirationDate() {
@@ -105,6 +110,14 @@ public class Card {
 
     public void setBalance(Long balance) {
         this.balance = balance;
+    }
+
+    public Currencies getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currencies currency) {
+        this.currency = currency;
     }
 
     public boolean isCardBlockingRequest() {

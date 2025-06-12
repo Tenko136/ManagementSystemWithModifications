@@ -61,8 +61,8 @@ public class AdminServiceImpl {
 
     @Transactional
     public void saveCard(Card card) {
-        card.setNumber(card.getNumber().replaceAll("\\D", ""));
-        if (!card.getNumber().matches("[0-9]{16}")) {
+        card.setCardNumber(card.getCardNumber().replaceAll("\\D", ""));
+        if (!card.getCardNumber().matches("[0-9]{16}")) {
             throw new RuntimeException("Некорректный номер");
         }
 //        if (card.getNumber() == null || card.getBalance() == null || card.getStatus() == null ||
@@ -77,6 +77,7 @@ public class AdminServiceImpl {
         adminDAO.deleteCard(id);
     }
 
+    //todo автоматическая блокировка карт с истекшим сроком годности
     @Transactional
     @Scheduled(cron = "@midnight")
     public List<CardsForBlocking> blockingCardRequest() {

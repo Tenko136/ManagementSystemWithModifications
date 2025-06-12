@@ -8,22 +8,23 @@ import java.time.LocalDateTime;
 @Table(name = "currency_rate")
 public class CurrencyRate {
 
+    //todo ограничение в 3 года, пока действует карта - сохраняется курс валют + выписка по истечению срока годности карты
     @Id
     @GeneratedValue
     @Column(name = "id")
     private Long id;
 
     @Column(name = "USD")
-    private CurrencyRate USD;
+    private Double USD;
 
-    @Column(name = "EUR")
-    private CurrencyRate EUR;
+    @Column(name = "rate_USD_EUR")
+    private Double rateEUR;
 
-    @Column(name = "RUB")
-    private CurrencyRate RUB;
+    @Column(name = "rate_USD_RUB")
+    private Double rateRUB;
 
-    @Column(name = "KZT")
-    private CurrencyRate KZT;
+    @Column(name = "rate_USD_KZT")
+    private Double rateKZT;
 
     @Column(name = "currency_date")
     private LocalDateTime currencyDate;
@@ -31,12 +32,12 @@ public class CurrencyRate {
     public CurrencyRate() {
     }
 
-    public CurrencyRate(Long id, CurrencyRate USD, CurrencyRate EUR, CurrencyRate RUB, CurrencyRate KZT, LocalDateTime currencyDate) {
+    public CurrencyRate(Long id, Double USD, Double rateEUR, Double rateRUB, Double rateKZT, LocalDateTime currencyDate) {
         this.id = id;
         this.USD = USD;
-        this.EUR = EUR;
-        this.RUB = RUB;
-        this.KZT = KZT;
+        this.rateEUR = rateEUR;
+        this.rateRUB = rateRUB;
+        this.rateKZT = rateKZT;
         this.currencyDate = currencyDate;
     }
 
@@ -44,36 +45,40 @@ public class CurrencyRate {
         return id;
     }
 
-    public CurrencyRate getUSD() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Double getUSD() {
         return USD;
     }
 
-    public void setUSD(CurrencyRate USD) {
+    public void setUSD(double USD) {
         this.USD = USD;
     }
 
-    public CurrencyRate getEUR() {
-        return EUR;
+    public Double getRateEUR() {
+        return rateEUR;
     }
 
-    public void setEUR(CurrencyRate EUR) {
-        this.EUR = EUR;
+    public void setRateEUR(double rateEUR) {
+        this.rateEUR = rateEUR;
     }
 
-    public CurrencyRate getRUB() {
-        return RUB;
+    public Double getRateRUB() {
+        return rateRUB;
     }
 
-    public void setRUB(CurrencyRate RUB) {
-        this.RUB = RUB;
+    public void setRateRUB(double rateRUB) {
+        this.rateRUB = rateRUB;
     }
 
-    public CurrencyRate getKZT() {
-        return KZT;
+    public Double getRateKZT() {
+        return rateKZT;
     }
 
-    public void setKZT(CurrencyRate KZT) {
-        this.KZT = KZT;
+    public void setRateKZT(double rateKZT) {
+        this.rateKZT = rateKZT;
     }
 
     public LocalDateTime getCurrencyDate() {
